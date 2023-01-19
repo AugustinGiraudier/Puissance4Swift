@@ -8,19 +8,28 @@
 import Foundation
 
 
-public struct Gride{
+public struct Gride : CustomStringConvertible{
     
     // ---- datas ---- //
     
     private var gride : [[Int?]]
+    public let nbRows : Int
+    public let nbCol : Int
     
-    private let nbRows : Int
-    public var NbRows : Int {nbRows}
-    
-    private let nbCol : Int
-    public var NbCol : Int {nbCol}
-    
-	public var Description : String { "Board \(nbRows)x\(nbCol)" }
+    public var description: String {
+        var desc : String = ""
+        for iRow in 0...nbRows-1{
+            for iCol in 0...nbCol-1{
+                var char = " "
+                if let c = self[iCol, iRow]{
+                    char = String(c)
+                }
+                desc.append("|\(char)")
+            }
+            desc.append("|\n")
+        }
+        return desc
+    }
     
     // ---- init ---- //
     
@@ -87,7 +96,5 @@ public struct Gride{
             
         }
     }
-    
-    //Is full
     
 }

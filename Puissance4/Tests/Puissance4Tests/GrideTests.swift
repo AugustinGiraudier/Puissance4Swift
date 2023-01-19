@@ -14,15 +14,15 @@ final class GrideTests: XCTestCase {
     func testCreateDefaultGride(){
         let gride = Gride()
         XCTAssertNotNil(gride, "Gride must be created")
-        XCTAssertEqual(gride?.NbCol, 7, "Default cols number must be 7")
-        XCTAssertEqual(gride?.NbRows, 6, "Default rows number must be 6")
+        XCTAssertEqual(gride?.nbCol, 7, "Default cols number must be 7")
+        XCTAssertEqual(gride?.nbRows, 6, "Default rows number must be 6")
     }
     
     func testCreateGrideWithValues(){
         let gride = Gride(nbRows: 4, nbCol: 5)
         XCTAssertNotNil(gride, "Gride 1 must be created")
-        XCTAssertEqual(gride?.NbRows, 4, "nb rows must be 4")
-        XCTAssertEqual(gride?.NbCol, 5, "nb cols must be 5")
+        XCTAssertEqual(gride?.nbRows, 4, "nb rows must be 4")
+        XCTAssertEqual(gride?.nbCol, 5, "nb cols must be 5")
         
         // 0 val
         let gride2 = Gride(nbRows: 0, nbCol: 1)

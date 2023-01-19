@@ -12,20 +12,13 @@ public struct Game{
     
     
     private var gride : Gride
-    private let displayer : Displayer
     
-    public init(gride: Gride, displayer : Displayer? = nil) {
+    public init(gride: Gride) {
         self.gride = gride
-        if displayer == nil{
-            self.displayer = ConsoleDisplayer()
-        }
-        else{
-            self.displayer = displayer!
-        }
     }
     
     public func displayGride(){
-        displayer.displayGride(gride: gride)
+        print(gride)
     }
     
 }
