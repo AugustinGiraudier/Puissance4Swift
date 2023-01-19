@@ -10,11 +10,12 @@ import Foundation
 
 public struct Game{
     
-    
     private var gride : Gride
+    private var players : [Player]
     
     public init(gride: Gride) {
         self.gride = gride
+        players = Array()
     }
     
     public func displayGride(){
