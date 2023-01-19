@@ -10,7 +10,7 @@ public class Player{
     
     public let id : Int
     public let name : String
-    private var symbol : String
+    public let symbol : String
     
     public init?(withid id: Int, andName name: String, displayedAs symbol: String? = nil) {
         // verif id dans [0,9]

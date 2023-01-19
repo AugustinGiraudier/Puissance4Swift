@@ -22,6 +22,7 @@ _=gride.addPiece(col: 2, id: 0)
 _=gride.addPiece(col: 2, id: 1)
 _=gride.addPiece(col: 2, id: 0)
 
-var game : Game = Game(gride : gride)
+var game : Game = Game(withGride: gride, andDisplayer: ConsoleDisplayer())
 
-game.displayGride()
+var disp = ConsoleDisplayer()
+disp.displayGride(gride, withSymbolMapper: [0:"X", 1:"O"])

@@ -8,28 +8,13 @@
 import Foundation
 
 
-public struct Gride : CustomStringConvertible{
+public struct Gride{
     
     // ---- datas ---- //
     
     private var gride : [[Int?]]
     public let nbRows : Int
     public let nbCol : Int
-    
-    public var description: String {
-        var desc : String = ""
-        for iRow in 0...nbRows-1{
-            for iCol in 0...nbCol-1{
-                var char = " "
-                if let c = self[iCol, iRow]{
-                    char = String(c)
-                }
-                desc.append("|\(char)")
-            }
-            desc.append("|\n")
-        }
-        return desc
-    }
     
     // ---- init ---- //
     
