@@ -8,6 +8,7 @@
 import Foundation
 
 public struct ClassicRules : Rules{
+
     public var nbPiecesToAlign: Int
     public var nbRows: Int
     public var nbCols: Int
@@ -16,6 +17,10 @@ public struct ClassicRules : Rules{
         self.nbCols = nbCols
         self.nbRows = nbRows
         self.nbPiecesToAlign = nbPiecesToAlign
+    }
+
+    public func grideRespectsRules(_ gride: Gride) -> Bool {
+        gride.nbRows == self.nbRows && gride.nbCol == self.nbCols
     }
 
     public func checkWinner(gride: Gride, lastInserted: (Int, Int)) -> Bool {
