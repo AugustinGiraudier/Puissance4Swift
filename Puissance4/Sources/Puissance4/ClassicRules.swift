@@ -13,7 +13,7 @@ public struct ClassicRules : Rules{
     public var nbRows: Int
     
     public var nbCols: Int
-    
+
     public func checkWinner(gride: Gride, lastInserted: (Int, Int)) -> Bool {
         
         // errors :
@@ -26,47 +26,40 @@ public struct ClassicRules : Rules{
             return false
         }
         
-        var x : Int = lastInserted.0
-        var y : Int = lastInserted.1
-        var totalAlign = 0
-        
-        // --- check line --- //
-        while x > 0 && gride[x,y] == playerId{
-            totalAlign+=1
-            x -= 1
+
+        let steps = [
+            // toApplyOnX | toApplyOnY | restetNbPice?
+
+            (1, 0, true),       // horizontal droite
+            (-1, 0, false),     // horizontal gauche
+            (0, 1, true),       // vertical haut
+            (0, -1, false),     // vertical bas
+            (1, 1, true),       // diagonal droite haut
+            (1, -1, false),     // diagonal droite bas
+            (-1, 1, true),      // diagonal gauche haut
+            (-1, -1, false)     // diagonal gauche bass
+        ]
+
+        var nbPieceAligned : Int = 0;
+
+        for step in steps {
+            if step.2{
+                nbPieceAligned = 0
+            }
+
+            var x = lastInserted.0;
+            var y = lastInserted.1;
+
+            while let id = gride[x,y], id == playerId {
+                x += step.0
+                y += step.1
+                nbPieceAligned+=1
+                if nbPieceAligned >= nbPiecesToAlign {
+                    return true
+                }
+            }
         }
-        x = lastInserted.0
-        while x < gride.nbCol && gride[x,y] == playerId{
-            totalAlign += 1
-            x+=1
-        }
-        if(totalAlign >= nbPiecesToAlign){
-            return true // gagnant en ligne
-        }
-        
-        x = lastInserted.0
-        totalAlign = 0
-        
-        // --- check col --- //
-        while y > 0 && gride[x,y] == playerId{
-            totalAlign+=1
-            y -= 1
-        }
-        y = lastInserted.0
-        while y < gride.nbCol && gride[x,y] == playerId{
-            totalAlign += 1
-            y+=1
-        }
-        if(totalAlign >= nbPiecesToAlign){
-            return true // gagnant en colonne
-        }
-        
-        x = lastInserted.0
-        totalAlign = 0
-        
-        // --- check first diago --- //
-        
-        return true
+        return false
     }
     
     
