@@ -47,23 +47,25 @@ final class GrideTests: XCTestCase {
         // valid adding
         let res = gride?.addPiece(col: 0, id: 9)
         XCTAssertNotNil(res, "res shouldn't be nil")
-        XCTAssertTrue(res!, "Piece adding must be succeeded")
+        XCTAssertTrue(res!.0, "Piece adding must be succeeded")
+        XCTAssertEqual(0, res!.1)
+        XCTAssertEqual(1, res!.2)
         _ = gride?.addPiece(col: 0, id: 9)
         
         // col full
         let res2 = gride?.addPiece(col: 0, id: 9)
         XCTAssertNotNil(res2, "res 2 shouldn't be nil")
-        XCTAssertFalse(res2!, "Piece 2 should be failed")
+        XCTAssertFalse(res2!.0, "Piece 2 should be failed")
         
         // negative
         let res3 = gride?.addPiece(col: -1, id: 9)
         XCTAssertNotNil(res3, "res 3 shouldn't be nil")
-        XCTAssertFalse(res3!, "Piece 3 should be failed")
+        XCTAssertFalse(res3!.0, "Piece 3 should be failed")
         
         // out of bound
         let res4 = gride?.addPiece(col: 2, id: 9)
         XCTAssertNotNil(res4, "res 4 shouldn't be nil")
-        XCTAssertFalse(res4!, "Piece 4 should be failed")
+        XCTAssertFalse(res4!.0, "Piece 4 should be failed")
     }
     
     func testSubstract(){
