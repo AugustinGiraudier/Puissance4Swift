@@ -8,8 +8,11 @@
 import Foundation
 import Puissance4
 
-var rule = ClassicRules(nbRows: 6, nbCols: 7, nbPiecesToAlign: 4)
-var oGrid = Grid()
+let nbCol = 7
+let nbRows = 6
+
+var rule = ClassicRules(nbRows: nbRows, nbCols: nbCol, nbPiecesToAlign: 5)
+var oGrid = Grid(nbRows: nbRows,nbCol: nbCol)
 
 guard let grid = oGrid else {
     print("Erreur de creation de la grille...")

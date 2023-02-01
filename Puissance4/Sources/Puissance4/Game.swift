@@ -65,7 +65,6 @@ public struct Game{
                     pieceAdded = grid.addPiece(col: oCol!, id: players[i].id)
                 }
                 // verif du gagnant
-                print("added : \(pieceAdded.1), \(pieceAdded.2)")
                 if rules.checkWinner(grid: grid, lastInserted: (pieceAdded.1, pieceAdded.2)) {
                     winner = (true, players[i].name)
                     break
@@ -112,9 +111,8 @@ public struct Game{
                 let player = HumanPlayer(withid: players.count, andName: "J\(players.count+1)", displayedAs: "O", displayFunc: display, inputIntFunc: getIntInput, inputStrFunc: getStrInput)
                 guard player != nil, addPlayer(player: player!) else { return false }
             case 2:
-                //addPlayer(player: IA)
-                input = nil
-                break
+                let player = RobotPlayer(withid: players.count, andName: "J\(players.count+1)", displayedAs: "O", displayFunc: display, inputIntFunc: getIntInput, inputStrFunc: getStrInput)
+                guard player != nil, addPlayer(player: player!) else { return false }
             default:
                 input = nil
                 break
