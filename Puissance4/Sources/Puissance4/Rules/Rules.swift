@@ -14,7 +14,6 @@ public protocol Rules{
     var nbRows : Int { get }
     var nbCols : Int { get }
 
-    func grideRespectsRules(_ gride: Gride) -> Bool
-    func checkWinner(gride: Gride, lastInserted: (Int, Int)) -> Bool
-    
+    func gridRespectsRules(_ grid: Grid) -> Bool
+    func checkWinner(grid: Grid, lastInserted: (Int, Int)) -> Bool
 }

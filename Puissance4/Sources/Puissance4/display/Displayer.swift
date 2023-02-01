@@ -10,6 +10,6 @@ import Foundation
 
 public protocol Displayer{
     
-    func displayGride(_ gride: Gride, withSymbolMapper mapper: Dictionary<Int?, String?>?)
+    func displaygrid(_ grid: Grid, withSymbolMapper mapper: Dictionary<Int?, String?>?)
     
 }

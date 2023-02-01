@@ -10,13 +10,13 @@ import Foundation
 
 public struct Game{
     
-    private var gride : Gride
+    private var grid : Grid
     private var players : [Player]
     private let displayer : Displayer
     private var symbolMapper : [Int?:String?]
     
-    public init(withGride gride: Gride, andDisplayer displayer: Displayer? = nil) {
-        self.gride = gride
+    public init(withgrid grid: Grid, andDisplayer displayer: Displayer? = nil) {
+        self.grid = grid
         players = Array()
         if let disp=displayer{
             self.displayer = disp
@@ -36,8 +36,8 @@ public struct Game{
         return true
     }
     
-    public func displayGride(){
-        displayer.displayGride(gride, withSymbolMapper: symbolMapper)
+    public func displaygrid(){
+        displayer.displaygrid(grid, withSymbolMapper: symbolMapper)
     }
     
 }

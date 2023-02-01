@@ -1,5 +1,5 @@
 //
-//  Gride.swift
+//  Grid.swift
 //  
 //
 //  Created by Augustin Giraudier on 17/01/2023.
@@ -8,11 +8,11 @@
 import Foundation
 
 
-public struct Gride{
+public struct Grid{
     
     // ---- datas ---- //
     
-    private var gride : [[Int?]]
+    private var grid : [[Int?]]
     public let nbRows : Int
     public let nbCol : Int
     
@@ -24,7 +24,7 @@ public struct Gride{
         }
         self.nbRows = nbRows
         self.nbCol = nbCol
-        self.gride = Array(repeating: Array(repeating: nil, count: nbCol), count: nbRows)
+        self.grid = Array(repeating: Array(repeating: nil, count: nbCol), count: nbRows)
     }
     
     // ---- public methodes ---- //
@@ -34,7 +34,7 @@ public struct Gride{
             if col > nbCol-1 || col < 0 || row > nbRows-1 || row < 0{
                 return nil
             }
-            return gride[row][col]
+            return grid[row][col]
         }
     }
     
@@ -50,7 +50,7 @@ public struct Gride{
     }
     
     public func isFull() -> Bool{
-        for iRow in gride{
+        for iRow in grid{
             for iCol : Int? in iRow{
                 if iCol == nil{
                     return false
@@ -63,23 +63,25 @@ public struct Gride{
     // ---- private methodes ---- //
     
     private mutating func addPiece(col : Int, row : Int, id : Int) -> Bool{
-        if col > nbCol-1 || col < 0 || row > nbRows-1 || row < 0 || gride[row][col] != nil{
+        if col > nbCol-1 || col < 0 || row > nbRows-1 || row < 0 || grid[row][col] != nil{
             return false
         }
-		self.gride[row][col] = id
+		self.grid[row][col] = id
         return true
     }
     
+    /*
     private mutating func removePiece(col: Int, row: Int, propageGravity : Bool = true){
         if col > nbCol-1 || col < 0 || row > nbRows-1 || row < 0 {
             return
         }
-        self.gride[row][col] = nil
+        self.grid[row][col] = nil
         if propageGravity{
             
             // TODO
             
         }
     }
+     */
     
 }

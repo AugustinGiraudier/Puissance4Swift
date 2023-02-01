@@ -10,7 +10,7 @@ final class ClassicalRuleTests : XCTestCase {
 
     func testGrideVerif(){
 
-        func expect(rule: Rules, gride : Gride?, shouldWork : Bool){
+        func expect(rule: Rules, gride : Grid?, shouldWork : Bool){
             if shouldWork{
                 XCTAssertTrue(rule.grideRespectsRules(gride!))
             }else{
@@ -20,20 +20,20 @@ final class ClassicalRuleTests : XCTestCase {
 
         let rule = ClassicRules(nbRows: 6, nbCols: 5, nbPiecesToAlign: 9)
 
-        expect(rule: rule, gride: Gride(nbRows: 6, nbCol: 5), shouldWork: true)
-        expect(rule: rule, gride: Gride(nbRows: 1, nbCol: 1), shouldWork: false)
-        expect(rule: rule, gride: Gride(nbRows: 5, nbCol: 6), shouldWork: false)
+        expect(rule: rule, gride: Grid(nbRows: 6, nbCol: 5), shouldWork: true)
+        expect(rule: rule, gride: Grid(nbRows: 1, nbCol: 1), shouldWork: false)
+        expect(rule: rule, gride: Grid(nbRows: 5, nbCol: 6), shouldWork: false)
 
     }
 
     func testWinner(){
 
-        func expect(rule : Rules, gride : Gride, lastInserted: (Int, Int), shouldWin : Bool){
+        func expect(rule : Rules, gride : Grid, lastInserted: (Int, Int), shouldWin : Bool){
             XCTAssertEqual(shouldWin, rule.checkWinner(gride: gride, lastInserted: lastInserted))
         }
 
         let rule = ClassicRules(nbRows: 6, nbCols: 7, nbPiecesToAlign: 4)
-        var gride = Gride()!
+        var gride = Grid()!
 
         // test lastInserted nil :
         expect(rule: rule, gride: gride, lastInserted: (0,0), shouldWin: false)
@@ -61,7 +61,7 @@ final class ClassicalRuleTests : XCTestCase {
         _=gride.addPiece(col: 1, id: 0)
         expect(rule: rule, gride: gride, lastInserted: (1,2), shouldWin: false)
 
-        gride = Gride()!
+        gride = Grid()!
         
         // test horizontal simple
         _=gride.addPiece(col: 0, id: 0)
@@ -93,7 +93,7 @@ final class ClassicalRuleTests : XCTestCase {
         _=gride.addPiece(col: 2, id: 0)
         expect(rule: rule, gride: gride, lastInserted: (2,3), shouldWin: false)
         
-        gride = Gride()!
+        gride = Grid()!
         
         // test diagonale montante
         _=gride.addPiece(col: 0, id: 0)
@@ -111,7 +111,7 @@ final class ClassicalRuleTests : XCTestCase {
         _=gride.addPiece(col: 3, id: 0)
         expect(rule: rule, gride: gride, lastInserted: (3,2), shouldWin: true)
         
-        gride = Gride()!
+        gride = Grid()!
         
         // test diagonale montante gagnee par le centre
         _=gride.addPiece(col: 0, id: 0)
@@ -130,7 +130,7 @@ final class ClassicalRuleTests : XCTestCase {
         _=gride.addPiece(col: 2, id: 0)
         expect(rule: rule, gride: gride, lastInserted: (2,3), shouldWin: true)
         
-        gride = Gride()!
+        gride = Grid()!
         
         // test diagonale descendante
         _=gride.addPiece(col: 0, id: 1)
@@ -148,7 +148,7 @@ final class ClassicalRuleTests : XCTestCase {
         _=gride.addPiece(col: 3, id: 0)
         expect(rule: rule, gride: gride, lastInserted: (3,5), shouldWin: true)
         
-        gride = Gride()!
+        gride = Grid()!
         
         // test diagonale descendante gagnee par le centre
         _=gride.addPiece(col: 0, id: 1)

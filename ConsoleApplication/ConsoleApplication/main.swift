@@ -10,7 +10,7 @@ import Puissance4
 
 var rule = ClassicRules(nbRows: 7, nbCols: 6, nbPiecesToAlign: 4)
 
-var grideW : Gride? = Gride()
+var grideW : Grid? = Grid()
 guard var gride = grideW else{
     print("Error : gride = null")
     exit(1)

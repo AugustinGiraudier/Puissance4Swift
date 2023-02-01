@@ -19,19 +19,19 @@ public struct ClassicRules : Rules{
         self.nbPiecesToAlign = nbPiecesToAlign
     }
 
-    public func grideRespectsRules(_ gride: Gride) -> Bool {
-        gride.nbRows == self.nbRows && gride.nbCol == self.nbCols
+    public func gridRespectsRules(_ grid: Grid) -> Bool {
+        grid.nbRows == self.nbRows && grid.nbCol == self.nbCols
     }
 
-    public func checkWinner(gride: Gride, lastInserted: (Int, Int)) -> Bool {
+    public func checkWinner(grid: Grid, lastInserted: (Int, Int)) -> Bool {
         
         // errors :
-        if lastInserted.0 < 0 || lastInserted.0 >= gride.nbCol || lastInserted.1 < 0 || lastInserted.1 >= gride.nbRows{
+        if lastInserted.0 < 0 || lastInserted.0 >= grid.nbCol || lastInserted.1 < 0 || lastInserted.1 >= grid.nbRows{
             return false
         }
         
         // verify last inserted place not nil
-        guard let playerId = gride[lastInserted.0, lastInserted.1] else{
+        guard let playerId = grid[lastInserted.0, lastInserted.1] else{
             return false
         }
 
@@ -60,9 +60,9 @@ public struct ClassicRules : Rules{
             x = lastInserted.0 + step.0;
             y = lastInserted.1 + step.1;
 
-            var test = gride[x,y]
+            var test = grid[x,y]
 
-            while let id = gride[x,y], id == playerId {
+            while let id = grid[x,y], id == playerId {
                 x += step.0
                 y += step.1
                 nbPieceAligned+=1
