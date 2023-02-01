@@ -38,15 +38,17 @@ public struct Grid{
         }
     }
     
-    public mutating func addPiece(col : Int, id: Int) -> Bool{
+    public mutating func addPiece(col : Int, id: Int) -> (Bool, Int, Int){
         if col > nbCol-1 || col < 0{
-            return false
+            return (false, 0, 0)
         }
         var iRow : Int = nbRows-1
-        while !addPiece(col: col, row: iRow, id: id) && iRow >= 0{
+        var placing = (false, 0, 0)
+        while !placing.0 && iRow >= 0{
+            placing = addPiece(col: col, row: iRow, id: id)
             iRow-=1
         }
-        return  iRow != -1
+        return  (iRow != -1, placing.1, placing.2)
     }
     
     public func isFull() -> Bool{
@@ -62,12 +64,12 @@ public struct Grid{
     
     // ---- private methodes ---- //
     
-    private mutating func addPiece(col : Int, row : Int, id : Int) -> Bool{
+    private mutating func addPiece(col : Int, row : Int, id : Int) -> (Bool, Int, Int){
         if col > nbCol-1 || col < 0 || row > nbRows-1 || row < 0 || grid[row][col] != nil{
-            return false
+            return (false, 0, 0)
         }
 		self.grid[row][col] = id
-        return true
+        return (true, col, row)
     }
     
     /*
