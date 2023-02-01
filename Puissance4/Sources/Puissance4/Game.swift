@@ -12,18 +12,13 @@ public struct Game{
     
     private var grid : Grid
     private var players : [Player]
-    private let displayer : Displayer
+    private let gridDisplayer : (Grid, Dictionary<Int?, String?>?) -> Void
     private var symbolMapper : [Int?:String?]
     
-    public init(withgrid grid: Grid, andDisplayer displayer: Displayer? = nil) {
+    public init(withgrid grid: Grid, andDisplayFunc displayer: @escaping (Grid, Dictionary<Int?, String?>?) -> Void) {
         self.grid = grid
         players = Array()
-        if let disp=displayer{
-            self.displayer = disp
-        }
-        else{
-            self.displayer = ConsoleDisplayer()
-        }
+        gridDisplayer = displayer
         symbolMapper = [:]
     }
     
@@ -37,7 +32,7 @@ public struct Game{
     }
     
     public func displaygrid(){
-        displayer.displaygrid(grid, withSymbolMapper: symbolMapper)
+        gridDisplayer(grid, symbolMapper)
     }
     
 }
