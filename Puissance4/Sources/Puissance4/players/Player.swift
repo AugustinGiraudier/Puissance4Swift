@@ -10,7 +10,6 @@ public class Player {
     
     internal let display : (String) -> Void
     internal let getIntInput : () -> Int?
-    internal let getStrInput : () -> String
     
     public let id : Int
     public let name : String
@@ -19,8 +18,7 @@ public class Player {
     public init?(withid id: Int, andName name: String,
                  displayedAs symbol: String? = nil,
                  displayFunc : @escaping (String)-> Void,
-                 inputIntFunc : @escaping ()-> Int?,
-                 inputStrFunc : @escaping ()-> String ){
+                 inputIntFunc : @escaping ()-> Int?){
         
         // verif id dans [0,9]
         guard id >= 0 && id<10 && name.count>0 else {
@@ -31,7 +29,6 @@ public class Player {
         self.name = name
         self.display = displayFunc
         self.getIntInput = inputIntFunc
-        self.getStrInput = inputStrFunc
         
         if let s = symbol{
             // verif symbol is one char

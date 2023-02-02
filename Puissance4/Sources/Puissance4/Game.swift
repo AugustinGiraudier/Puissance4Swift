@@ -16,8 +16,6 @@ public struct Game{
     
     private let gridDisplayer : (Grid, Dictionary<Int?, String?>?) -> Void
     internal let display : (String) -> Void
-    internal let getIntInput : () -> Int?
-    internal let getStrInput : () -> String
     
     private var symbolMapper : [Int?:String?]
     
@@ -25,12 +23,11 @@ public struct Game{
                  andRules rules : Rules,
                  andGridDisplayFunc gridDisplayer: @escaping (Grid, Dictionary<Int?, String?>?) -> Void,
                  displayFunc : @escaping (String)-> Void,
-                 inputIntFunc : @escaping ()-> Int?,
-                 inputStrFunc : @escaping ()-> String
+                 players : [Player]
                  ) {
         
         // verif grids
-        guard rules.gridRespectsRules(grid) else { return nil }
+        guard rules.gridRespectsRules(grid), players.count > 0, rules.nbPlayerRespectsRules(players.count) else { return nil }
         
         self.grid = grid
         self.rules = rules
@@ -39,15 +36,16 @@ public struct Game{
         
         self.gridDisplayer = gridDisplayer
         self.display = displayFunc
-        self.getIntInput = inputIntFunc
-        self.getStrInput = inputStrFunc
+        self.players = []
+      
+        // randomize players order
+        for i in (0..<players.count).shuffled() {
+            guard addPlayer(player: players[i]) else {return nil}
+        }
         
     }
     
     public mutating func play() -> EndGame{
-        
-        // ajout des players
-        guard initPlayers() else { return .PLAYER_CANNOT_BE_CREATED }
         
         // boucle de jeu
         var winner = (false, "")
@@ -88,39 +86,6 @@ public struct Game{
         }
         players.append(player)
         symbolMapper[player.id] = player.symbol
-        return true
-    }
-    
-    private mutating func initPlayers() -> Bool{
-        // creation du joueur 1
-        let oj1 = HumanPlayer(withid: 0, andName: "J1", displayedAs: "X", displayFunc: display, inputIntFunc: getIntInput, inputStrFunc: getStrInput)
-        
-        // ajout
-        guard let j1 = oj1, addPlayer(player: j1) else { return false }
-        
-        // creation du joueur 2
-        var input : Int? = nil
-        while input == nil {
-            display("What type of second player do you want ?")
-            display(" 1 - play with a friend")
-            display(" 2 - play against a robot")
-            input = getIntInput()
-            guard input != nil else {continue}
-            switch(input!){
-            case 1:
-                let player = HumanPlayer(withid: players.count, andName: "J\(players.count+1)", displayedAs: "O", displayFunc: display, inputIntFunc: getIntInput, inputStrFunc: getStrInput)
-                guard player != nil, addPlayer(player: player!) else { return false }
-            case 2:
-                let player = RobotPlayer(withid: players.count, andName: "J\(players.count+1)", displayedAs: "O", displayFunc: display, inputIntFunc: getIntInput, inputStrFunc: getStrInput)
-                guard player != nil, addPlayer(player: player!) else { return false }
-            default:
-                input = nil
-                break
-            }
-        }
-
-        
-        
         return true
     }
     

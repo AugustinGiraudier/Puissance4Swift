@@ -25,10 +25,6 @@ public func consoleDisplaygrid(_ grid: Grid, withSymbolMapper mapper: Dictionary
     }
 }
 
-public func consoleNextString() -> String {
-    return readLine() ?? ""
-}
-
 public func consoleNextInt() -> Int? {
     let str = readLine() ?? ""
     return Int(str)

@@ -12,10 +12,12 @@ public struct ClassicRules : Rules{
     public var nbPiecesToAlign: Int
     public var nbRows: Int
     public var nbCols: Int
+    public var nbPlayers : Int
 
-    public init(nbRows : Int, nbCols : Int, nbPiecesToAlign : Int){
+    public init(nbRows : Int, nbCols : Int, nbPiecesToAlign : Int, nbPlayer : Int){
         self.nbCols = nbCols
         self.nbRows = nbRows
+        self.nbPlayers = nbPlayer
         self.nbPiecesToAlign = nbPiecesToAlign
     }
 
@@ -74,8 +76,8 @@ public struct ClassicRules : Rules{
         return false
     }
     
-    
-    
-    
+    public func nbPlayerRespectsRules(_ nbPalayer: Int) -> Bool {
+        return self.nbPlayers == nbPalayer
+    }
     
 }

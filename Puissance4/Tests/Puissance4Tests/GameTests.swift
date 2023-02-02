@@ -14,7 +14,7 @@ final class GameTests: XCTestCase {
     func testGame(){
         
         func expect(grid: Grid, rules : Rules, shouldWork : Bool){
-            var game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: consoleDisplaygrid, displayFunc: displayMsg, inputIntFunc: consoleNextInt, inputStrFunc: consoleNextString)
+            var game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: consoleDisplaygrid, displayFunc: displayMsg, players: [HumanPlayer(withid: 0, andName: "name", displayFunc: displayMsg, inputIntFunc: consoleNextInt)!])
             if shouldWork{
                 XCTAssertNotNil(game)
             }
@@ -24,36 +24,60 @@ final class GameTests: XCTestCase {
         }
         
         var grid = Grid(nbRows: 3, nbCol: 3)
-        var rules = ClassicRules(nbRows: 3, nbCols: 3, nbPiecesToAlign: 5)
+        var rules = ClassicRules(nbRows: 3, nbCols: 3, nbPiecesToAlign: 5, nbPlayer: 1)
         expect(grid: grid!, rules: rules, shouldWork: true)
         
-        grid = Grid(nbRows: 3, nbCol: 3)
-        rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 5)
+        rules = ClassicRules(nbRows: 3, nbCols: 3, nbPiecesToAlign: 5, nbPlayer: 0)
         expect(grid: grid!, rules: rules, shouldWork: false)
         
         grid = Grid(nbRows: 3, nbCol: 3)
-        rules = ClassicRules(nbRows: 3, nbCols: 2, nbPiecesToAlign: 5)
+        rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 5, nbPlayer: 1)
         expect(grid: grid!, rules: rules, shouldWork: false)
         
         grid = Grid(nbRows: 3, nbCol: 3)
-        rules = ClassicRules(nbRows: 2, nbCols: 3, nbPiecesToAlign: 5)
+        rules = ClassicRules(nbRows: 3, nbCols: 2, nbPiecesToAlign: 5, nbPlayer: 1)
         expect(grid: grid!, rules: rules, shouldWork: false)
+        
+        grid = Grid(nbRows: 3, nbCol: 3)
+        rules = ClassicRules(nbRows: 2, nbCols: 3, nbPiecesToAlign: 5, nbPlayer: 1)
+        expect(grid: grid!, rules: rules, shouldWork: false)
+        
     
+    }
+    
+    func testAddingManyPlayersWithSameId(){
+        
+        func doNothing(_ msg : String){return}
+        func getOne() -> Int {return 1}
+        func doNothingWithGrid(grid: Grid,dict: Dictionary<Int?, String?>?){return}
+        
+        var grid = Grid(nbRows: 3, nbCol: 3)!
+        var rules = ClassicRules(nbRows: 3, nbCols: 3, nbPiecesToAlign: 5, nbPlayer: 2)
+        
+        var players = [
+            HumanPlayer(withid: 0, andName: "A", displayFunc: doNothing, inputIntFunc: getOne)!,
+            HumanPlayer(withid: 0, andName: "B", displayFunc: doNothing, inputIntFunc: getOne)!
+        ]
+        
+        var game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, players: players)
+        
+        XCTAssertNil(game)
     }
     
     func testWinningPlay(){
         
-        // petit test qu'une partie se passe bien en remplissant la grille dans la colonne 1
+        // test qu'une partie se passe bien en remplissant la grille dans la colonne 1
         
         func doNothing(_ msg : String){return}
         func getOne() -> Int {return 1}
-        func getStr() -> String {return ""}
         func doNothingWithGrid(grid: Grid,dict: Dictionary<Int?, String?>?){return}
         
         let grid = Grid(nbRows: 2,nbCol: 2)!
-        let rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 1)
+        let rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 1, nbPlayer: 1)
         
-        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, inputIntFunc: getOne, inputStrFunc: getStr)
+        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, players: [
+            HumanPlayer(withid: 0, andName: "name", displayFunc: doNothing, inputIntFunc: getOne)!
+        ])
         
         let res = g!.play()
         
@@ -70,41 +94,25 @@ final class GameTests: XCTestCase {
         // petit test qu'une partie se passe bien en remplissant la grille dans la colonne 1
         
         func doNothing(_ msg : String){return}
-        func getStr() -> String {return ""}
         func doNothingWithGrid(grid: Grid,dict: Dictionary<Int?, String?>?){return}
         func getResponse() -> Int? {
             struct Holder {
-                static var isFirstCall = true
-                static var isSecondCall = true
-                static var timesCalled = -1
-                static var val = 0
+                static let values = [nil, 0,0,1,1]
+                static var index = -1
             }
-            
-            if Holder.isFirstCall {
-                Holder.isFirstCall = false
-                return 1
-            }
-            if(Holder.isSecondCall){
-                Holder.isSecondCall = false
-                return nil
-            }
-            
-            Holder.timesCalled += 1
-            if Holder.timesCalled >= 2{
-                Holder.timesCalled = 0
-                Holder.val += 1
-            }
-            
-            
-            return Holder.val
+            Holder.index+=1
+            return Holder.values[Holder.index]
         }
-        // cette fonction retourne : 1 nil 0 0 1 1 2 2 3 3 4 4 ...
-        // donc on choisi de jouer a 2 joueurs puis on test un retour nil et on remplis la grille 2x2
+        // cette fonction retourne : nil 0 0 1 1 (pour remplir la grille par les deux joueurs)
+        // donc on test de remplir la grille 2x2 pour verifier que la partie se termine meme sans gagnant
         
         let grid = Grid(nbRows: 2,nbCol: 2)!
-        let rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 3)
+        let rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 3, nbPlayer: 2)
         
-        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, inputIntFunc: getResponse, inputStrFunc: getStr)
+        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, players: [
+            HumanPlayer(withid: 0, andName: "name", displayFunc: doNothing, inputIntFunc: getResponse)!,
+            HumanPlayer(withid: 1, andName: "name2", displayFunc: doNothing, inputIntFunc: getResponse)!
+        ])
         
         let res = g!.play()
         

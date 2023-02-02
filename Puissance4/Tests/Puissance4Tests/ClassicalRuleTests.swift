@@ -18,7 +18,7 @@ final class ClassicalRuleTests : XCTestCase {
             }
         }
 
-        let rule = ClassicRules(nbRows: 6, nbCols: 5, nbPiecesToAlign: 9)
+        let rule = ClassicRules(nbRows: 6, nbCols: 5, nbPiecesToAlign: 9, nbPlayer: 0)
 
         expect(rule: rule, grid: Grid(nbRows: 6, nbCol: 5), shouldWork: true)
         expect(rule: rule, grid: Grid(nbRows: 1, nbCol: 1), shouldWork: false)
@@ -32,7 +32,7 @@ final class ClassicalRuleTests : XCTestCase {
             XCTAssertEqual(shouldWin, rule.checkWinner(grid: grid, lastInserted: lastInserted))
         }
 
-        let rule = ClassicRules(nbRows: 6, nbCols: 7, nbPiecesToAlign: 4)
+        let rule = ClassicRules(nbRows: 6, nbCols: 7, nbPiecesToAlign: 4, nbPlayer: 0)
         var grid = Grid()!
 
         // test lastInserted nil :
