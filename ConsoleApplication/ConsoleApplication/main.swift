@@ -72,15 +72,6 @@ guard var game = oGame else{
 
 /// Lancement de la partie
 
-var res = game.play()
+game.play()
 
-switch(res){
-case .PLAYER_CANNOT_BE_CREATED:
-    print("Error : player cannot be created")
-case .GAME_ENDED:
-    print("The game is ended...")
-case .USER_QUIT:
-    print("The User has quit")
-}
-
-
+print("--- Game is finished ---")

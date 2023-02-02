@@ -44,8 +44,10 @@ public struct Game{
         }
         
     }
-    
-    public mutating func play() -> EndGame{
+
+    ///
+    /// Lance la boucle de jeu avec les joueurs ajoutés à la partie
+    public mutating func play(){
         
         // boucle de jeu
         var winner = (false, "")
@@ -54,7 +56,6 @@ public struct Game{
                 var oCol : Int? = nil
                 var pieceAdded = (false, 0, 0)
                 displaygrid()
-                display("\(players[i].name), it's your turn :")
                 while !pieceAdded.0 {
                     oCol = players[i].chooseColumn(withGrid: grid, andRules: rules)
                     if oCol == nil {
@@ -76,10 +77,12 @@ public struct Game{
         else{
             display("The grid is full...")
         }
-        
-        return .GAME_ENDED
     }
-    
+
+    ///
+    /// Ajoute un joueur à la partie, verifie l'unicité de son id et map son symbol
+    /// - Parameter player: joueur à ajouter
+    /// - Returns:true si le joueur a pu etre ajouté sinon false
     private mutating func addPlayer(player : Player) -> Bool{
         guard players.allSatisfy({$0.id != player.id}) else{
             return false
@@ -88,7 +91,9 @@ public struct Game{
         symbolMapper[player.id] = player.symbol
         return true
     }
-    
+
+    ///
+    /// Affiche la grille en cours
     public func displaygrid(){
         gridDisplayer(grid, symbolMapper)
     }

@@ -71,9 +71,8 @@ final class GameTests: XCTestCase {
             HumanPlayer(withid: 0, andName: "name", displayFunc: UtDisplay, inputIntFunc: UtGetInt)!
         ])
         
-        let res = g!.play()
+        g!.play()
         
-        XCTAssertEqual(EndGame.GAME_ENDED, res)
         XCTAssertEqual(0, g?.grid[0,1])
         XCTAssertNil(g?.grid[0,0])
         XCTAssertNil(g?.grid[1,1])
@@ -103,9 +102,8 @@ final class GameTests: XCTestCase {
             HumanPlayer(withid: 1, andName: "name2", displayFunc: UtDisplay, inputIntFunc: getResponse)!
         ])
         
-        let res = g!.play()
+        g!.play()
         
-        XCTAssertEqual(EndGame.GAME_ENDED, res)
         XCTAssertNotNil(g?.grid[1,1])
         XCTAssertNotNil(g?.grid[0,0])
         XCTAssertNotNil(g?.grid[0,1])
@@ -121,9 +119,8 @@ final class GameTests: XCTestCase {
         
         var game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: UtDisplayGrid, displayFunc: UtDisplay, players: [player])!
         
-        let res = game.play()
+        game.play()
         
-        XCTAssertEqual(EndGame.GAME_ENDED, res)
         XCTAssertTrue(game.grid.isFull())
         
     }

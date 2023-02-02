@@ -2,11 +2,10 @@
 //  RobotPlayer.swift
 //  
 //
-//  Created by etudiant on 01/02/2023.
+//  Created by Augustin Giraudier on 01/02/2023.
 //
 
 import Foundation
-
 
 public class RobotPlayer : Player{
     
@@ -21,7 +20,13 @@ public class RobotPlayer : Player{
         self.sleepingTime = sleepingTime
         super.init(withid: id, andName: name, displayedAs: symbol, displayFunc: displayFunc, inputIntFunc: inputIntFunc)
     }
-    
+
+    ///
+    /// Retourne la colonne choisie par le joueur Robot
+    /// - Parameters:
+    ///   - grid: grille actuelle
+    ///   - rules: regles du jeu
+    /// - Returns:l'index de la colonne ou jouer
     public override func chooseColumn(withGrid grid : Grid, andRules rules : Rules) -> Int? {
         display("Robot is thinking...")
         var g = grid

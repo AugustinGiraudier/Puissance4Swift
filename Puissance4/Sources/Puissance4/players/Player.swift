@@ -41,10 +41,13 @@ public class Player {
             self.symbol = String(id)
         }
     }
-    
+
+    ///
+    /// Retourne la colonne choisie par le joueur (doit etre overridee)
+    /// - Parameters:
+    ///   - grid: grille actuelle
+    ///   - rules: regles du jeu
+    /// - Returns:l'index de la colonne ou jouer
     public func chooseColumn(withGrid grid : Grid, andRules rules : Rules) -> Int? {nil}
-    
-    
-    
-    
+
 }
