@@ -14,7 +14,7 @@ final class GameTests: XCTestCase {
     func testGame(){
         
         func expect(grid: Grid, rules : Rules, shouldWork : Bool){
-            var game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: consoleDisplaygrid, displayFunc: displayMsg, players: [HumanPlayer(withid: 0, andName: "name", displayFunc: displayMsg, inputIntFunc: consoleNextInt)!])
+            let game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: consoleDisplaygrid, displayFunc: displayMsg, players: [HumanPlayer(withid: 0, andName: "name", displayFunc: displayMsg, inputIntFunc: consoleNextInt)!])
             if shouldWork{
                 XCTAssertNotNil(game)
             }
@@ -47,44 +47,36 @@ final class GameTests: XCTestCase {
     
     func testAddingManyPlayersWithSameId(){
         
-        func doNothing(_ msg : String){return}
-        func getOne() -> Int {return 1}
-        func doNothingWithGrid(grid: Grid,dict: Dictionary<Int?, String?>?){return}
+        let grid = Grid(nbRows: 3, nbCol: 3)!
+        let rules = ClassicRules(nbRows: 3, nbCols: 3, nbPiecesToAlign: 5, nbPlayer: 2)
         
-        var grid = Grid(nbRows: 3, nbCol: 3)!
-        var rules = ClassicRules(nbRows: 3, nbCols: 3, nbPiecesToAlign: 5, nbPlayer: 2)
-        
-        var players = [
-            HumanPlayer(withid: 0, andName: "A", displayFunc: doNothing, inputIntFunc: getOne)!,
-            HumanPlayer(withid: 0, andName: "B", displayFunc: doNothing, inputIntFunc: getOne)!
+        let players = [
+            HumanPlayer(withid: 0, andName: "A", displayFunc: UtDisplay, inputIntFunc: UtGetInt)!,
+            HumanPlayer(withid: 0, andName: "B", displayFunc: UtDisplay, inputIntFunc: UtGetInt)!
         ]
         
-        var game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, players: players)
+        let game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: UtDisplayGrid, displayFunc: UtDisplay, players: players)
         
         XCTAssertNil(game)
     }
     
     func testWinningPlay(){
         
-        // test qu'une partie se passe bien en remplissant la grille dans la colonne 1
-        
-        func doNothing(_ msg : String){return}
-        func getOne() -> Int {return 1}
-        func doNothingWithGrid(grid: Grid,dict: Dictionary<Int?, String?>?){return}
+        // test qu'une partie se passe bien en remplissant la grille dans la colonne 0
         
         let grid = Grid(nbRows: 2,nbCol: 2)!
         let rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 1, nbPlayer: 1)
         
-        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, players: [
-            HumanPlayer(withid: 0, andName: "name", displayFunc: doNothing, inputIntFunc: getOne)!
+        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: UtDisplayGrid, displayFunc: UtDisplay, players: [
+            HumanPlayer(withid: 0, andName: "name", displayFunc: UtDisplay, inputIntFunc: UtGetInt)!
         ])
         
         let res = g!.play()
         
         XCTAssertEqual(EndGame.GAME_ENDED, res)
-        XCTAssertEqual(0, g?.grid[1,1])
+        XCTAssertEqual(0, g?.grid[0,1])
         XCTAssertNil(g?.grid[0,0])
-        XCTAssertNil(g?.grid[0,1])
+        XCTAssertNil(g?.grid[1,1])
         XCTAssertNil(g?.grid[1,0])
         
     }
@@ -92,9 +84,6 @@ final class GameTests: XCTestCase {
     func testNotWinningPlay(){
         
         // petit test qu'une partie se passe bien en remplissant la grille dans la colonne 1
-        
-        func doNothing(_ msg : String){return}
-        func doNothingWithGrid(grid: Grid,dict: Dictionary<Int?, String?>?){return}
         func getResponse() -> Int? {
             struct Holder {
                 static let values = [nil, 0,0,1,1]
@@ -109,9 +98,9 @@ final class GameTests: XCTestCase {
         let grid = Grid(nbRows: 2,nbCol: 2)!
         let rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 3, nbPlayer: 2)
         
-        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: doNothingWithGrid, displayFunc: doNothing, players: [
-            HumanPlayer(withid: 0, andName: "name", displayFunc: doNothing, inputIntFunc: getResponse)!,
-            HumanPlayer(withid: 1, andName: "name2", displayFunc: doNothing, inputIntFunc: getResponse)!
+        var g = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: UtDisplayGrid, displayFunc: UtDisplay, players: [
+            HumanPlayer(withid: 0, andName: "name", displayFunc: UtDisplay, inputIntFunc: getResponse)!,
+            HumanPlayer(withid: 1, andName: "name2", displayFunc: UtDisplay, inputIntFunc: getResponse)!
         ])
         
         let res = g!.play()
@@ -121,6 +110,21 @@ final class GameTests: XCTestCase {
         XCTAssertNotNil(g?.grid[0,0])
         XCTAssertNotNil(g?.grid[0,1])
         XCTAssertNotNil(g?.grid[1,0])
+        
+    }
+    
+    func testRobotPlayer(){
+        
+        let grid = Grid(nbRows: 2,nbCol: 2)!
+        let rules = ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 3, nbPlayer: 1)
+        let player = RobotPlayer(withid: 0, andName: "hh", displayFunc: UtDisplay, inputIntFunc: UtGetInt, sleepingTime: 0)!
+        
+        var game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: UtDisplayGrid, displayFunc: UtDisplay, players: [player])!
+        
+        let res = game.play()
+        
+        XCTAssertEqual(EndGame.GAME_ENDED, res)
+        XCTAssertTrue(game.grid.isFull())
         
     }
 

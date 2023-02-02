@@ -13,7 +13,7 @@ import Puissance4
 let nbCol = 7
 let nbRows = 6
 
-var rule = ClassicRules(nbRows: nbRows, nbCols: nbCol, nbPiecesToAlign: 4)
+var rule = ClassicRules(nbRows: nbRows, nbCols: nbCol, nbPiecesToAlign: 4,nbPlayer: 2)
 var oGrid = Grid(nbRows: nbRows,nbCol: nbCol)
 
 guard let grid = oGrid else {
