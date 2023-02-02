@@ -48,7 +48,7 @@ public struct Grid{
             placing = addPiece(col: col, row: iRow, id: id)
             iRow-=1
         }
-        return  (iRow != -1, placing.1, placing.2)
+        return  placing
     }
     
     public func isFull() -> Bool{

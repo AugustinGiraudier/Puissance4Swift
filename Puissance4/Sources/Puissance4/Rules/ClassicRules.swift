@@ -66,9 +66,9 @@ public struct ClassicRules : Rules{
                 x += step.0
                 y += step.1
                 nbPieceAligned+=1
-                if nbPieceAligned >= nbPiecesToAlign {
-                    return true
-                }
+            }
+            if nbPieceAligned >= nbPiecesToAlign {
+                return true
             }
         }
         return false

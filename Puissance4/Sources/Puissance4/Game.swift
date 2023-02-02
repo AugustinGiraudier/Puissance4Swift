@@ -10,7 +10,7 @@ import Foundation
 
 public struct Game{
     
-    private var grid : Grid
+    public private(set) var grid : Grid
     private let rules : Rules
     private var players : [Player]
     
