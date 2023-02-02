@@ -7,4 +7,3 @@ Possibilités :
  * parametrer le nombre de pions à aligner pour gagner
  * jouer contre une autre personne
  * jouer contre un robot aléatoire
- 
