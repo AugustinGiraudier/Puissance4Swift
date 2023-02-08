@@ -52,19 +52,19 @@ public struct Game{
         var winner = (false, "")
         var gridFull = false
         while !gridFull, !winner.0 {
-            for i in 0..<players.count {
+            for player in players {
                 var oCol : Int? = nil
                 var pieceAdded = (false, 0, 0)
                 displaygrid()
                 while !pieceAdded.0 {
-                    oCol = players[i].chooseColumn(withGrid: grid, andRules: rules)
+                    oCol = player.chooseColumn(withGrid: grid, andRules: rules)
                     if oCol == nil {
                         continue
                     }
-                    pieceAdded = grid.addPiece(col: oCol!, id: players[i].id)
+                    pieceAdded = grid.addPiece(col: oCol!, id: player.id)
                 }
                 // verif du gagnant
-                winner = (rules.checkWinner(grid: grid, lastInserted: (pieceAdded.1, pieceAdded.2)),players[i].name)
+                winner = (rules.checkWinner(grid: grid, lastInserted: (pieceAdded.1, pieceAdded.2)),player.name)
                 gridFull = grid.isFull()
                 if winner.0 || gridFull{
                     break
