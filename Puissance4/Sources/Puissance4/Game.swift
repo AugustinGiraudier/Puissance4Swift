@@ -31,7 +31,6 @@ public struct Game{
         
         self.grid = grid
         self.rules = rules
-        self.players = Array()
         self.symbolMapper = [:]
         
         self.gridDisplayer = gridDisplayer
@@ -51,8 +50,8 @@ public struct Game{
         
         // boucle de jeu
         var winner = (false, "")
-        var grideFull = false
-        while !grideFull, !winner.0 {
+        var gridFull = false
+        while !gridFull, !winner.0 {
             for i in 0..<players.count {
                 var oCol : Int? = nil
                 var pieceAdded = (false, 0, 0)
@@ -66,8 +65,8 @@ public struct Game{
                 }
                 // verif du gagnant
                 winner = (rules.checkWinner(grid: grid, lastInserted: (pieceAdded.1, pieceAdded.2)),players[i].name)
-                grideFull = grid.isFull()
-                if winner.0 || grideFull{
+                gridFull = grid.isFull()
+                if winner.0 || gridFull{
                     break
                 }
             }

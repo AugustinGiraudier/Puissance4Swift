@@ -21,7 +21,6 @@ guard let grid = oGrid else {
     exit(1)
 }
 
-
 /// CREATE PLAYERS
 
 // creation du joueur 1

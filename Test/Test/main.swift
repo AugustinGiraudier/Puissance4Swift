@@ -5,29 +5,37 @@
 //  Created by etudiant on 08/02/2023.
 //
 
+// delegates    x
+// extentions   x
+// generecite   x
+// equatable    x
+
+
+
 import Foundation
 
 print("Hello, World!")
 
-
-class Mouton{
-    
-    private let displayfunc : (String,Int) -> Int
-    
-    public init(function : @escaping (String, Int) -> Int){
-        self.displayfunc = function
-    }
-    
-    public func run(){
-        let result = displayfunc("toto", 1)
-        print(result)
-    }
-    
+enum test{
+    case JHVJHGJG,
+    case maBite
 }
 
-let mout = Mouton(function: { v1, v2 in
-    print("\(v1): \(v2)")
-    return Int.random(in: 0...10)
-})
+class Mouton<T>{
+    
+    private let name : T;
+    
 
+    public init(name : T){
+        self.name = name
+    }
+    
+    
+    public func run(){
+        print(name)
+    }
+}
+
+
+var mout = Mouton<String>(name: "test")
 mout.run()
