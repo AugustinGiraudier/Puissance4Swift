@@ -69,8 +69,6 @@ public struct ClassicRules : Rules{
             }
             x = lastInserted.0 + step.0;
             y = lastInserted.1 + step.1;
-            var test = grid[x,y]
-            
             while let id = grid[x,y], id == playerId {
                 x += step.0
                 y += step.1

@@ -51,6 +51,7 @@ public struct Game{
         
         // boucle de jeu
         var winner = (false, "")
+        var grideFull = false
         while !grid.isFull(), !winner.0 {
             for i in 0..<players.count {
                 var oCol : Int? = nil
@@ -64,8 +65,9 @@ public struct Game{
                     pieceAdded = grid.addPiece(col: oCol!, id: players[i].id)
                 }
                 // verif du gagnant
-                if rules.checkWinner(grid: grid, lastInserted: (pieceAdded.1, pieceAdded.2)) {
-                    winner = (true, players[i].name)
+                winner = (rules.checkWinner(grid: grid, lastInserted: (pieceAdded.1, pieceAdded.2)),players[i].name)
+                grideFull = grid.isFull()
+                if winner.0 || grideFull{
                     break
                 }
             }
