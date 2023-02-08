@@ -52,7 +52,7 @@ public struct Game{
         // boucle de jeu
         var winner = (false, "")
         var grideFull = false
-        while !grid.isFull(), !winner.0 {
+        while !grideFull, !winner.0 {
             for i in 0..<players.count {
                 var oCol : Int? = nil
                 var pieceAdded = (false, 0, 0)
