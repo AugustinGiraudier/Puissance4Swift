@@ -13,7 +13,7 @@ final class PlayerTests: XCTestCase {
 
     func testInit(){
         func expect(id: Int,name: String,symbol: String? = nil, shouldNotBeNil: Bool = true){
-            let p : Player? = Player(withid: id, andName: name,displayedAs: symbol, displayFunc: displayMsg, inputIntFunc: consoleNextInt)
+            let p : Player? = Player(withid: id, andName: name,displayedAs: symbol, displayFunc: UtDisplay, inputIntFunc: UtGetInt)
             if shouldNotBeNil{
                 XCTAssertNotNil(p)
             }
@@ -37,7 +37,7 @@ final class PlayerTests: XCTestCase {
     
     func testPlayReturnsNil(){
         
-        let p : Player? = Player(withid: 0, andName: "toto", displayFunc: displayMsg, inputIntFunc: consoleNextInt)
+        let p : Player? = Player(withid: 0, andName: "toto", displayFunc: UtDisplay, inputIntFunc: UtGetInt)
         
         XCTAssertNotNil(p)
         XCTAssertNil(p!.chooseColumn(withGrid: Grid()!, andRules: ClassicRules(nbRows: 2, nbCols: 2, nbPiecesToAlign: 2, nbPlayer: 0)))

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Puissance4
 
 ///
 /// Affiche une grille dans la console

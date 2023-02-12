@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC2F0F6A299921C80070FBD6 /* IOFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2F0F692999217E0070FBD6 /* IOFunctions.swift */; };
 		EC40927D2976D236009A0E85 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC40927C2976D236009A0E85 /* main.swift */; };
 		EC40928B2976D85A009A0E85 /* Puissance4 in Frameworks */ = {isa = PBXBuildFile; productRef = EC40928A2976D85A009A0E85 /* Puissance4 */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EC2F0F692999217E0070FBD6 /* IOFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOFunctions.swift; sourceTree = "<group>"; };
 		EC4092792976D236009A0E85 /* ConsoleApplication */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ConsoleApplication; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC40927C2976D236009A0E85 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		EC4092862976D41C009A0E85 /* Puissance4 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Puissance4; path = ../Puissance4; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				EC40927C2976D236009A0E85 /* main.swift */,
+				EC2F0F692999217E0070FBD6 /* IOFunctions.swift */,
 			);
 			path = ConsoleApplication;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC40927D2976D236009A0E85 /* main.swift in Sources */,
+				EC2F0F6A299921C80070FBD6 /* IOFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

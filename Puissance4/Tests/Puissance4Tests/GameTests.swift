@@ -14,7 +14,7 @@ final class GameTests: XCTestCase {
     func testGame(){
         
         func expect(grid: Grid, rules : Rules, shouldWork : Bool){
-            let game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: consoleDisplaygrid, displayFunc: displayMsg, players: [HumanPlayer(withid: 0, andName: "name", displayFunc: displayMsg, inputIntFunc: consoleNextInt)!])
+            let game = Game(withgrid: grid, andRules: rules, andGridDisplayFunc: UtDisplayGrid, displayFunc: UtDisplay, players: [HumanPlayer(withid: 0, andName: "name", displayFunc: UtDisplay, inputIntFunc: UtGetInt)!])
             if shouldWork{
                 XCTAssertNotNil(game)
             }
