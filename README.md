@@ -16,6 +16,8 @@ Dans ce projet, j'ai choisi de créer ces différentes classes ou structures :
 - Rules (protocol) : elles permettent de verifier la bonne construction de la partie dans le respect des regles (nombre de joueurs, taille de la grille, condition de gain de la partie etc...).
 - Game (struct) : elle permet de gérer la boucle de jeu, elle est construite avec la Grid, les Rules et les Players qui faconnent la partie.
 
+---
+
 * J'ai choisi de faire de Player une classe car il elle destinée à etre dérivée.
 * Grid et Game sont des struct pour permettre de les retourner par copie sans possibilité de modification et pour bénéficier de la rapidité d'allocation sur la pile.
 * Rules est un protocol car il est important que ses realisations réécrivent toutes ses fonctionnalités.
