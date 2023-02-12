@@ -8,6 +8,8 @@ Possibilités :
  * jouer contre une autre personne
  * jouer contre un robot aléatoire
 
+ Le code coverage du package contenant les classes du model est de 100%.
+
 ## Choix d'implementation
 
 Dans ce projet, j'ai choisi de créer ces différentes classes ou structures :
