@@ -41,3 +41,21 @@ Dans ce projet, j'ai choisi de créer ces différentes classes ou structures :
 - Ouvrez le workspace "WorkspacePuissance4.xcworkspace" 
 - selectionnez la "ConsoleApplication" 
 - Lancez l'application et vous pourrez jouer au puissance 4 dans la console
+
+## Visuels
+
+Le jeu n'est pour l'instant jouable qu'en console mais sa structure utilisant des fonctions déléguées pour l'affichage permettraient facilement d'en faire une application.
+
+voici quelques visuels d'une partie en console : 
+
+**Lancement de la partie**  
+<img src="./README_images/1.png">
+
+**Fin d'une partie**  
+<img src="./README_images/2.png">
+
+**Taille de grille paramétrable**  
+<img src="./README_images/3.png">
+
+**Création des règles de la partie**  
+<img src="./README_images/4.png">
